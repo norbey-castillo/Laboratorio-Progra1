@@ -6,8 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    static List<String> estudiantes = new ArrayList<>();
-    static List<Double> calificaciones = new ArrayList<>();
+    static ListaEstudiante Lista;
 
     public static void main(String[] args) {
 
@@ -33,51 +32,51 @@ public class Main {
                 System.out.print("Ingrese la calificación del estudiante: ");
                 double calificacion = Double.parseDouble(scanner.nextLine());
 
-                estudiantes.add(nombre);
-                calificaciones.add(calificacion);
+                Lista.Estudiantes.add(nombre);
+                Lista.Notas.add(calificacion);
 
                 System.out.println("Estudiante agregado correctamente.");
 
             } else if (opcion == 2) {
 
-                if (estudiantes.isEmpty()) {
+                if (Lista.Estudiantes.isEmpty()) {
                     System.out.println("No hay estudiantes registrados.");
                 } else {
                     System.out.println("\nLista de estudiantes:");
-                    for (int i = 0; i < estudiantes.size(); i++) {
-                        System.out.println(estudiantes.get(i) +
-                                " - Calificación: " + calificaciones.get(i));
+                    for (int i = 0; i < Lista.Estudiantes.size(); i++) {
+                        System.out.println(Lista.Estudiantes.get(i) +
+                                " - Calificación: " + Lista.Notas.get(i));
                     }
                 }
 
             } else if (opcion == 3) {
 
-                if (calificaciones.isEmpty()) {
+                if (Lista.Estudiantes.isEmpty()) {
                     System.out.println("No hay calificaciones registradas.");
                 } else {
                     double suma = 0;
 
-                    for (double calificacion : calificaciones) {
+                    for (double calificacion : Lista.Notas) {
                         suma += calificacion;
                     }
 
-                    double promedio = suma / calificaciones.size();
+                    double promedio = suma / Lista.Notas.size();
                     System.out.println("El promedio de calificaciones es: " + promedio);
                 }
 
             } else if (opcion == 4) {
 
-                if (calificaciones.isEmpty()) {
+                if (Lista.Notas.isEmpty()) {
                     System.out.println("No hay calificaciones registradas.");
                 } else {
 
-                    double maxCalificacion = calificaciones.get(0);
-                    String estudianteMax = estudiantes.get(0);
+                    double maxCalificacion = Lista.Notas.get(0);
+                    String estudianteMax = Lista.Estudiantes.get(0);
 
-                    for (int i = 1; i < calificaciones.size(); i++) {
-                        if (calificaciones.get(i) > maxCalificacion) {
-                            maxCalificacion = calificaciones.get(i);
-                            estudianteMax = estudiantes.get(i);
+                    for (int i = 1; i < Lista.Notas.size(); i++) {
+                        if (Lista.Notas.get(i) > maxCalificacion) {
+                            maxCalificacion = Lista.Notas.get(i);
+                            estudianteMax = Lista.Estudiantes.get(i);
                         }
                     }
 
