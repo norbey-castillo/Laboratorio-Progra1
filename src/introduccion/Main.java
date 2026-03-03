@@ -1,28 +1,24 @@
 package introduccion;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
 
     static ListaEstudiante Lista;
+    
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("Bienvenido al sistema de gestión de estudiantes.");
+        
+        int opcion;
 
-        while (true) {
-            System.out.println("\n1. Agregar estudiante");
-            System.out.println("2. Mostrar lista de estudiantes");
-            System.out.println("3. Calcular promedio de calificaciones");
-            System.out.println("4. Mostrar estudiante con la calificación más alta");
-            System.out.println("5. Salir");
-            System.out.print("Seleccione una opción: ");
+       do {
+            MostrarMenu();
 
-            int opcion = Integer.parseInt(scanner.nextLine());
+            opcion = IngresarEntero("");
 
             if (opcion == 1) {
 
@@ -87,14 +83,58 @@ public class Main {
             } else if (opcion == 5) {
 
                 System.out.println("Saliendo del sistema...");
-                break;
 
             } else {
 
                 System.out.println("Opción no válida. Intente de nuevo.");
             }
-        }
+        } while(opcion != 5);
 
         scanner.close();
+    }
+
+    
+    static double IngresarCalificación(String mensaje) {
+		System.out.print(mensaje);
+		double num;
+		while(true) {
+			try {
+				num = scanner.nextDouble();
+				if (num > 100 || num < 0) {
+					System.out.print("Calificación fuera de rango, intente nuevamente: ");
+					scanner.next();
+					continue;
+				}
+				break;
+			} catch(InputMismatchException e) {
+				System.out.print("Error en el formato, intente nuevamente: ");
+				scanner.next();
+			}
+		}
+		return num;
+	}
+    
+    static int IngresarEntero(String mensaje) {
+		System.out.print(mensaje);
+		int num;
+		while(true) {
+			try {
+				num = scanner.nextInt();
+				break;
+			} catch(InputMismatchException e) {
+				System.out.print("Error en el formato, intente nuevamente: ");
+				scanner.next();
+			}
+		}
+		return num;
+	}    
+
+    static void MostrarMenu() {
+    	System.out.println("\n1. Agregar estudiante");
+        System.out.println("2. Mostrar lista de estudiantes");
+        System.out.println("3. Calcular promedio de calificaciones");
+        System.out.println("4. Mostrar estudiante con la calificación más alta");
+        System.out.println("5. Salir");
+        System.out.print("Seleccione una opción: ");
     }
 }
