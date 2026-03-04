@@ -5,25 +5,13 @@ import java.util.Scanner;
 
 public class Main {
 
-    static ListaEstudiante Lista;
-    
+    static ListaEstudiante Lista = new ListaEstudiante();
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-
-        System.out.println("Bienvenido al sistema de gestión de estudiantes.");
-        
-        int opcion;
-
-       do {
-            MostrarMenu();
-
-            opcion = IngresarEntero("");
-
-            if (opcion == 1) {
-
-                System.out.print("Ingrese el nombre del estudiante: ");
+public static void AgregarEstudiante(){
+    System.out.print("Ingrese el nombre del estudiante: ");
                 String nombre = scanner.nextLine();
+                scanner.nextLine();
 
                 System.out.print("Ingrese la calificación del estudiante: ");
                 double calificacion = Double.parseDouble(scanner.nextLine());
@@ -32,22 +20,21 @@ public class Main {
                 Lista.Notas.add(calificacion);
 
                 System.out.println("Estudiante agregado correctamente.");
+}
 
-            } else if (opcion == 2) {
-
-                if (Lista.Estudiantes.isEmpty()) {
+public static void MostrarListaEstudiantes(){
+    if (Lista.Estudiantes.isEmpty()) {
                     System.out.println("No hay estudiantes registrados.");
                 } else {
                     System.out.println("\nLista de estudiantes:");
                     for (int i = 0; i < Lista.Estudiantes.size(); i++) {
-                        System.out.println(Lista.Estudiantes.get(i) +
-                                " - Calificación: " + Lista.Notas.get(i));
+                        System.out.println("Nombre: " + Lista.Estudiantes.get(i) + " - Calificación: " + Lista.Notas.get(i));
                     }
                 }
+}
 
-            } else if (opcion == 3) {
-
-                if (Lista.Estudiantes.isEmpty()) {
+public static void CalcularPromedio(){
+     if (Lista.Estudiantes.isEmpty()) {
                     System.out.println("No hay calificaciones registradas.");
                 } else {
                     double suma = 0;
@@ -59,10 +46,10 @@ public class Main {
                     double promedio = suma / Lista.Notas.size();
                     System.out.println("El promedio de calificaciones es: " + promedio);
                 }
+}
 
-            } else if (opcion == 4) {
-
-                if (Lista.Notas.isEmpty()) {
+public static void MostrarCalificacionMasAlta(){
+    if (Lista.Notas.isEmpty()) {
                     System.out.println("No hay calificaciones registradas.");
                 } else {
 
@@ -79,22 +66,49 @@ public class Main {
                     System.out.println("El estudiante con la calificación más alta es: "
                             + estudianteMax + " con " + maxCalificacion);
                 }
+}
 
-            } else if (opcion == 5) {
+public static void MenuPrincipal(){
+     System.out.println("Bienvenido al sistema de gestión de estudiantes.");
+        
+        int opcion;
 
-                System.out.println("Saliendo del sistema...");
+       do {
+            System.out.println("\n1. Agregar estudiante");
+            System.out.println("2. Mostrar lista de estudiantes");
+            System.out.println("3. Calcular promedio de calificaciones");
+            System.out.println("4. Mostrar estudiante con la calificación más alta");
+            System.out.println("5. Salir");
+            System.out.print("Seleccione una opción: ");
 
-            } else {
+            opcion = IngresarEntero("");
 
-                System.out.println("Opción no válida. Intente de nuevo.");
+            switch (opcion) {
+                case 1:
+                    AgregarEstudiante();
+                    break;
+                case 2:
+                    MostrarListaEstudiantes();
+                    break;
+                case 3:
+                    CalcularPromedio();
+                    break;
+                case 4:
+                    MostrarCalificacionMasAlta();
+                    break;
+                case 5:
+                    System.out.println("Saliendo del sistema...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+                    break;
             }
+
         } while(opcion != 5);
 
-        scanner.close();
-    }
+}
 
-    
-    static double IngresarCalificación(String mensaje) {
+static double IngresarCalificación(String mensaje) {
 		System.out.print(mensaje);
 		double num;
 		while(true) {
@@ -113,8 +127,8 @@ public class Main {
 		}
 		return num;
 	}
-    
-    static int IngresarEntero(String mensaje) {
+
+ static int IngresarEntero(String mensaje) {
 		System.out.print(mensaje);
 		int num;
 		while(true) {
@@ -129,12 +143,8 @@ public class Main {
 		return num;
 	}    
 
-    static void MostrarMenu() {
-    	System.out.println("\n1. Agregar estudiante");
-        System.out.println("2. Mostrar lista de estudiantes");
-        System.out.println("3. Calcular promedio de calificaciones");
-        System.out.println("4. Mostrar estudiante con la calificación más alta");
-        System.out.println("5. Salir");
-        System.out.print("Seleccione una opción: ");
+    public static void main(String[] args) {
+       MenuPrincipal();
+        scanner.close();
     }
 }
