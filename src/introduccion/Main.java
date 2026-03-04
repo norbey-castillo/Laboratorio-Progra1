@@ -8,80 +8,70 @@ public class Main {
     static ListaEstudiante Lista = new ListaEstudiante();
     static Scanner scanner = new Scanner(System.in);
 
-public static void AgregarEstudiante(){
-    System.out.print("Ingrese el nombre del estudiante: ");
-                String nombre = scanner.nextLine();
-                scanner.nextLine();
+	public static void AgregarEstudiante(){
+	    System.out.print("Ingrese el nombre del estudiante: ");
+        String nombre = scanner.nextLine();
 
-                System.out.print("Ingrese la calificación del estudiante: ");
-                double calificacion = Double.parseDouble(scanner.nextLine());
+        double calificacion = IngresarCalificacion("Ingrese la calificación del estudiante: ");
+        
+        Lista.Estudiantes.add(nombre);
+        Lista.Notas.add(calificacion);
 
-                Lista.Estudiantes.add(nombre);
-                Lista.Notas.add(calificacion);
+        System.out.println("Estudiante agregado correctamente.");
+	}
 
-                System.out.println("Estudiante agregado correctamente.");
-}
+	public static void MostrarListaEstudiantes(){
+	    if (estaVacio()) {
+	    	System.out.println("\nLista de estudiantes:");
+            for (int i = 0; i < Lista.Estudiantes.size(); i++) {
+                System.out.println("Nombre: " + Lista.Estudiantes.get(i) + " - Calificación: " + Lista.Notas.get(i));
+            }
+        }
+	}
 
-public static void MostrarListaEstudiantes(){
-    if (Lista.Estudiantes.isEmpty()) {
-                    System.out.println("No hay estudiantes registrados.");
-                } else {
-                    System.out.println("\nLista de estudiantes:");
-                    for (int i = 0; i < Lista.Estudiantes.size(); i++) {
-                        System.out.println("Nombre: " + Lista.Estudiantes.get(i) + " - Calificación: " + Lista.Notas.get(i));
-                    }
+	public static void CalcularPromedio(){
+	    if (estaVacio()) {
+	    	double suma = 0;
+
+            for (double calificacion : Lista.Notas) {
+                suma += calificacion;
+            }
+
+            double promedio = suma / Lista.Notas.size();
+            System.out.println("El promedio de calificaciones es: " + promedio);
+        }
+	}
+
+	public static void MostrarCalificacionMasAlta(){
+	    if (estaVacio()) {
+	    	double maxCalificacion = Lista.Notas.get(0);
+            String estudianteMax = Lista.Estudiantes.get(0);
+
+            for (int i = 1; i < Lista.Notas.size(); i++) {
+                if (Lista.Notas.get(i) > maxCalificacion) {
+                    maxCalificacion = Lista.Notas.get(i);
+                    estudianteMax = Lista.Estudiantes.get(i);
                 }
-}
+            }
 
-public static void CalcularPromedio(){
-     if (Lista.Estudiantes.isEmpty()) {
-                    System.out.println("No hay calificaciones registradas.");
-                } else {
-                    double suma = 0;
+            System.out.println("El estudiante con la calificación más alta es: "
+                    + estudianteMax + " con " + maxCalificacion);
+        }
+	}
 
-                    for (double calificacion : Lista.Notas) {
-                        suma += calificacion;
-                    }
-
-                    double promedio = suma / Lista.Notas.size();
-                    System.out.println("El promedio de calificaciones es: " + promedio);
-                }
-}
-
-public static void MostrarCalificacionMasAlta(){
-    if (Lista.Notas.isEmpty()) {
-                    System.out.println("No hay calificaciones registradas.");
-                } else {
-
-                    double maxCalificacion = Lista.Notas.get(0);
-                    String estudianteMax = Lista.Estudiantes.get(0);
-
-                    for (int i = 1; i < Lista.Notas.size(); i++) {
-                        if (Lista.Notas.get(i) > maxCalificacion) {
-                            maxCalificacion = Lista.Notas.get(i);
-                            estudianteMax = Lista.Estudiantes.get(i);
-                        }
-                    }
-
-                    System.out.println("El estudiante con la calificación más alta es: "
-                            + estudianteMax + " con " + maxCalificacion);
-                }
-}
-
-public static void MenuPrincipal(){
-     System.out.println("Bienvenido al sistema de gestión de estudiantes.");
+	public static void MenuPrincipal(){
+		System.out.println("Bienvenido al sistema de gestión de estudiantes.");
         
         int opcion;
 
-       do {
+        do {
             System.out.println("\n1. Agregar estudiante");
             System.out.println("2. Mostrar lista de estudiantes");
             System.out.println("3. Calcular promedio de calificaciones");
             System.out.println("4. Mostrar estudiante con la calificación más alta");
             System.out.println("5. Salir");
-            System.out.print("Seleccione una opción: ");
 
-            opcion = IngresarEntero("");
+            opcion = IngresarEntero("Seleccione una opción: ");
 
             switch (opcion) {
                 case 1:
@@ -106,9 +96,9 @@ public static void MenuPrincipal(){
 
         } while(opcion != 5);
 
-}
+	}
 
-static double IngresarCalificación(String mensaje) {
+	static double IngresarCalificacion(String mensaje) {
 		System.out.print(mensaje);
 		double num;
 		while(true) {
@@ -116,7 +106,6 @@ static double IngresarCalificación(String mensaje) {
 				num = scanner.nextDouble();
 				if (num > 100 || num < 0) {
 					System.out.print("Calificación fuera de rango, intente nuevamente: ");
-					scanner.next();
 					continue;
 				}
 				break;
@@ -128,7 +117,7 @@ static double IngresarCalificación(String mensaje) {
 		return num;
 	}
 
- static int IngresarEntero(String mensaje) {
+	static int IngresarEntero(String mensaje) {
 		System.out.print(mensaje);
 		int num;
 		while(true) {
@@ -140,11 +129,20 @@ static double IngresarCalificación(String mensaje) {
 				scanner.next();
 			}
 		}
+		scanner.nextLine(); //Esto como que limpia el scanner porque si no se salta cuanto hago un nextLine.
 		return num;
 	}    
-
+	
+	static boolean estaVacio() {
+		if (Lista.Estudiantes.isEmpty()) {
+            System.out.println("No hay estudiantes registrados.");
+            return false;
+        } 
+		return true;
+	}
+	
     public static void main(String[] args) {
        MenuPrincipal();
-        scanner.close();
+       scanner.close();
     }
 }
