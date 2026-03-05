@@ -80,8 +80,8 @@
 
 
 
-## iNTEGRANTES
+# iNTEGRANTES
 
-# Nombre:                   Carnet:
+## Nombre:                   Carnet:
 - Saul Chavez:              0905-25-12292
 - Norbey Castillo:          0905-25-9175
