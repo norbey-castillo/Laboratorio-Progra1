@@ -77,3 +77,11 @@
 ## ¿Cómo mejora la modularización la legibilidad del código?
 
 - Pues al dividir el código en bloques pequeñitos ayuda a procesar la utilidad de cada linea en nuestra mente, entiendo mejor como funciona y notando errores más rapido.
+
+
+
+## iNTEGRANTES
+
+# Nombre:                   Carnet:
+- Saul Chavez:              0905-25-12292
+- Norbey Castillo:          0905-25-9175
