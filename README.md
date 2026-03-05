@@ -23,6 +23,8 @@
 ### ¿Por que?
 - Porque cada variable local que se guarda dentro de un metodo unicamente influye en ese metodo, ya que si no lo definimos localmente puede que no compile o que se confunda con otra variable que sea universal y al conectarse entran en conflicto las dos variables y ahi es cuando nos puede dar error el programa.
 
+
+
 ## Validaciones y manejo de errores
 
 ### ¿Que errores podrían ocurrir?
@@ -36,6 +38,9 @@
 ### ¿Por qué son importantes? 
 
 - Porque primero le dan robustez al programa y evita que caiga cuando hay una situación imprevista y segundo dan una mejor experiencia a quien lo usa.
+
+
+
 
 # PREGUNTAS DE REFLEXION.
 
@@ -55,6 +60,7 @@
 - Como dije, al darles nombres descriptivos que nos indiquen que cosas hace cada metodo podemos navegar tranquilamente por el codigo, si necesitamos revisar alguna funcionalidad nosortos solo nos vamos al metodo que contiene esa funcionalidad sin tener que batallar mucho para encontrar en que parte del programa se realiza una accion.
 
 ## ¿Por qué no es recomendable usar muchas variables globales?
+- porque se pueden confundir con otras variables que sean globales y que tengan una funcionalidad distinta, si se usan muchas variables globales y varias de esas variables llevan funcionalidades diferentes pero nombres relativamente similares puede haber una confusion y hacer que el programa no corra bien.
 
 ### Posibilidad de errores inesperados
 
