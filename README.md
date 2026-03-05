@@ -81,5 +81,7 @@
 
 
 # iNTEGRANTES
-- Saul Chavez:              0905-25-12292
-- Norbey Castillo:          0905-25-9175
+|Nombre          |Carnet       |
+|----------------|------------:|
+|Saul Humberto Chavez Rivas     |0905-25-12292|
+|Oscar Norbey Gonzales Castillo |0905-25-9175 |
